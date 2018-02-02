@@ -1,0 +1,206 @@
+.file {
+  /* width: 750rpx;
+  overflow: hidden; */
+}
+
+.header-container {
+  height: 200rpx;
+  padding-top: 20rpx;
+  /* align-items: center; */
+  display: flex;
+}
+
+/* 头像 */
+
+.user-photo {
+  width: 160rpx;
+  height: 160rpx;
+  margin-top: 10rpx;
+  margin-left: 140rpx;
+  border-radius: 100rpx;
+}
+
+.name-container {
+  flex-grow: 1;
+  margin-left: 40rpx;
+  height: 100%;
+}
+
+/* 昵称 */
+
+.user-name {
+  display: flex;
+  height: 50%;
+  text-align: center;
+  align-items: center;
+  font-size: 34prx;
+  color: white;
+}
+
+/* 签名简介 */
+
+.user-autograph {
+  display: flex;
+  height: 50%;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: white;
+}
+
+.header-container button {
+  display: flex;
+  width: 100rpx;
+  padding: 0rpx 20rpx;
+  height: 50rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  border: solid #e4e3e2 1px;
+  border-radius: 10rpx;
+  color: white;
+  margin-right: 40rpx;
+  background-color: #313131;
+}
+
+.information-container {
+  padding-left: 60rpx;
+  text-indent: 60rpx;
+  text-align: left;
+  padding-right: 60rpx;
+}
+
+/* 基本资料 */
+
+.information {
+  font-size: 32rpx;
+  color: white;
+  text-decoration-line: underline;
+}
+
+.lable-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 30rpx;
+  padding-bottom: 30rpx;
+  margin-top: 30rpx;
+  background-color: black;
+}
+
+.lable {
+  display: flex;
+  width: 32%;
+  height: 60rpx;
+  margin-top: 20rpx;
+  color: white;
+  font-size: 26rpx;
+  align-items: center;
+  justify-content: center;
+  background: #626262;
+  margin-left: 60rpx;
+  border-radius: 30rpx;
+}
+
+.lable-big-margin {
+  display: flex;
+  width: 32%;
+  height: 60rpx;
+  margin-top: 20rpx;
+  color: white;
+  font-size: 26rpx;
+  align-items: center;
+  justify-content: center;
+  background: #626262;
+  margin-left: 150rpx;
+  border-radius: 30rpx;
+}
+
+.smoke-progress-container {
+  height: 100rpx;
+  align-items: center;
+  background-color: #626262;
+  display: flex;
+}
+
+.smoke-progress-container image {
+  width: 100rpx;
+  margin-left: 30rpx;
+  height: 100%;
+}
+
+.smoke-progress-container view {
+  display: block;
+  height: 60rpx;
+  flex-grow: 1;
+  margin-left: 20rpx;
+  border-radius: 20rpx;
+  border: solid #fff 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.smoke-progress-container text {
+  font-size: 26rpx;
+  margin-left: 20rpx;
+  margin-right: 30rpx;
+  color: white;
+}
+
+.progress {
+  position: absolute;
+  /* left: -40rpx; */
+}
+
+.attention {
+  overflow: hidden;
+}
+
+.friend-header-container {
+  height: 70px;
+  padding: 5px;
+  align-items: center;
+  display: flex;
+}
+
+.friend-header-container image {
+  margin-left: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+}
+
+.friend-header-container text {
+  display: flex;
+  height: 50%;
+  margin-left: 40rpx;
+  align-items: center;
+  font-size: 26rpx;
+  color: white;
+}
+
+/* 朋友动态栏 */
+
+.friend-container {
+  margin-left: 60rpx;
+  margin-right: 60rpx;
+}
+
+.friend-container text {
+  font-size: 30rpx;
+  color: white;
+  text-decoration-line: underline;
+}
+
+/* 朋友圈图片框 */
+
+.friend-image-container {
+  width: 100%;
+  display: flex;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.friend-image-container image {
+  width: 32%;
+  height: 140rpx;
+  border: solid #fff 1rpx;
+}

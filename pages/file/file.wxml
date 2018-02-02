@@ -1,0 +1,53 @@
+<!--file.wxml-->
+<view class="file">
+  <view class='header-container'>
+    <image class='user-photo' src='../../images/photo.jpg'></image>
+    <view class='name-container'>
+      <text class='user-name'>昵称：</text>
+      <text class='user-autograph'>签名、简介</text>
+    </view>
+    <button>编辑</button>
+  </view>
+  <view class='information-container'>
+    <text class='information'>基本资料：康康的广发卡喝上咖啡打开拉克丝大姐夫卡号发的卡拉东方航空拉黑啊数据库的弗拉很舒服的</text>
+  </view>
+  <view class='lable-container'>
+    <block wx:for='{{lableList}}' wx:key='id'>
+      <block wx:if="{{(index+2)%4==0}}">
+        <text class='lable-big-margin'> {{item.lable}}</text>
+      </block>
+      <block wx:else>
+        <text class='lable'> {{item.lable}}</text>
+      </block>
+    </block>
+  </view>
+  <view class='smoke-progress-container'>
+    <image src='../../images/bottle.png'></image>
+    <view>
+      <block wx:for="{{progressNum}}" wx:for-item='margin'>
+        <image class='progress' style='left:{{margin}}' src='../../images/progress.png'></image>
+      </block>
+    </view>
+    <text>{{smokeNum+'ml'}}</text>
+  </view>
+  <!--attention.wxml-->
+  <view class="attention">
+    <block wx:for="{{friendList}}" wx:key='id'>
+      <view>
+        <view class='friend-header-container'>
+          <image src='{{item.photo}}'></image>
+          <text>{{item.name}}</text>
+        </view>
+        <view class='friend-container'>
+          <text>{{item.friend_text}}</text>
+          <view class='friend-image-container'>
+            <block wx:for="{{item.imageList}}" wx:key='id'>
+              <image src='{{item.icon}}'></image>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

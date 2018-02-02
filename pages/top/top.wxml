@@ -1,0 +1,45 @@
+<!--file.wxml-->
+<view class="top">
+  <view class='header-container'>
+    <image class='user-photo' src='{{photo}}'></image>
+    <view class='name-container'>
+      <text class='user-name'>{{name}}</text>
+      <text class='user-autograph'>{{autograph}}</text>
+    </view>
+    <image class='attention-state' src='{{attentionIcon}}'></image>
+  </view>
+  <view class='information-container'>
+    <text class='information'>{{information}}</text>
+  </view>
+  <view class='lable-container'>
+    <block wx:for='{{lableList}}' wx:key='id'>
+      <block wx:if="{{(index+2)%4==0}}">
+        <text class='lable-big-margin'> {{item.lable}}</text>
+      </block>
+      <block wx:else>
+        <text class='lable'> {{item.lable}}</text>
+      </block>
+    </block>
+  </view>
+  <view class='smoke-progress-container'>
+    <image src='../../images/bottle.png'></image>
+    <view>
+      <block wx:for="{{progressNum}}" wx:for-item='margin'>
+        <image class='progress' style='left:{{margin}}' src='../../images/progress.png'></image>
+      </block>
+    </view>
+    <text>{{smokeNum+'ml'}}</text>
+  </view>
+  <view class='rank-container'>
+    <block wx:for='{{rankingList}}' wx:for-index="id">
+      <view class='rank-item-container'>
+        <image class='ranking-img' src='{{item.topNumber}}'></image>
+        <image class='friend-photo' src='{{item.photo}}'></image>
+        <text class='friend-name'>{{item.name}}</text>
+        <text class='friend-smoke'>{{item.smoke}}</text>
+      </view>
+    </block>
+
+  </view>
+
+</view>

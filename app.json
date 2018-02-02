@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/attention/attention",
+    "pages/file/file",
+    "pages/vape/vape",
+    "pages/user/user",
+    "pages/top/top",
+    "pages/search/search",
+    "pages/dynamic/dynamic",
+    "pages/article/article",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "VAPE雾",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "backgroundColor": "#313131",
+    "selectedColor": "#000",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "color": "#fff",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index.png"
+      },
+      {
+        "pagePath": "pages/attention/attention",
+        "color": "#fff",
+        "iconPath": "images/attention.png",
+        "selectedIconPath": "images/attention.png"
+      },
+      {
+        "pagePath": "pages/vape/vape",
+        "color": "#fff",
+        "iconPath": "images/vape.png",
+        "selectedIconPath": "images/vape.png"
+      },
+      {
+        "pagePath": "pages/file/file",
+        "color": "#fff",
+        "selectedIconPath": "images/file.png",
+        "iconPath": "images/file.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "color": "#fff",
+        "selectedIconPath": "images/user.png",
+        "iconPath": "images/user.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+<!--pages/dynamic/dynamic.wxml-->
+<view class='dynamic'>
+  <view class='header-container'>
+    <image class='user-photo' src='{{photo}}'></image>
+    <view class='name-container'>
+      <text class='user-name'>{{name}}</text>
+      <text class='user-autograph'>{{autograph}}</text>
+    </view>
+    <image class='attention-state' src='{{attentionIcon}}'></image>
+  </view>
+  <view class='friend-container'>
+    <text class='friend-text'>{{friend_text}}</text>
+    <view class='friend-image-container'>
+      <block wx:for="{{imageList}}" wx:key='id'>
+        <image class='friend-image' src='{{item.icon}}'></image>
+      </block>
+    </view>
+  </view>
+  <view class='comment-container'>
+    <input class='comment-input' value='输入评论' />
+    <view class='comment'>评论</view>
+    <view class='reward'>打赏</view>
+  </view>
+</view>

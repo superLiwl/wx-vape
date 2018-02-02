@@ -1,0 +1,104 @@
+.user {
+  width: 100%;
+  overflow: hidden;
+}
+
+.header-container {
+  width: 100%;
+  height: 200rpx;
+  padding: 20rpx;
+  align-items: center;
+  display: flex;
+}
+
+/* 头像 */
+
+.user-photo {
+  margin-left: 40rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 100rpx;
+}
+
+.name-container {
+  flex-grow: 1;
+  margin-left: 40rpx;
+  height: 100%;
+}
+
+/* 昵称 */
+
+.user-name {
+  display: flex;
+  height: 50%;
+  align-items: center;
+  font-size: 34prx;
+  color: white;
+}
+
+/* 签名简介 */
+
+.user-autograph {
+  display: flex;
+  height: 50%;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: white;
+}
+
+/* 打赏记录 */
+
+.reward {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  padding-left: 20px;
+  background-color: #626262;
+  border-bottom: solid #e4e3e2 1px;
+  border-top: solid #e4e3e2 1px;
+  color: white;
+}
+
+/* 常见问题 */
+
+.question {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  padding-left: 20px;
+  margin-top: 30px;
+  background-color: #626262;
+  border-bottom: solid #e4e3e2 1px;
+  border-top: solid #e4e3e2 1px;
+  color: white;
+}
+
+/* 关于雾 */
+
+.about {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  padding-left: 20px;
+  background-color: #626262;
+  border-bottom: solid #e4e3e2 1px;
+  border-top: solid #e4e3e2 1px;
+  color: white;
+}
+
+/* 通知 */
+
+.notice {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  padding-left: 20px;
+  background-color: #626262;
+  border-bottom: solid #e4e3e2 1px;
+  border-top: solid #e4e3e2 1px;
+  color: white;
+}

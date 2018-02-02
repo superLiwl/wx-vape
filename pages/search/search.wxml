@@ -1,0 +1,14 @@
+<view class='header-container'>
+  <view class='serach-container'>
+    <image class='search-icon' src='../../images/search.png' />
+    <input class='search-input' value='输入关键字搜索用户、文章' />
+  </view>
+</view>
+<view class='article-container'>
+  <block wx:for='{{articleList}}' wx:key='id'>
+    <view bindtap='toArticle'>
+      <text class='article-tilte'>{{item.title}}</text>
+      <text class='article-content'>{{item.content}}</text>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,133 @@
+/* pages/dynamic/dynamic.wxss */
+
+.header-container {
+  width: 100%;
+  height: 200rpx;
+  padding-top: 20rpx;
+  align-items: center;
+  display: flex;
+}
+
+.user-photo {
+  margin-left: 80rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 100rpx;
+}
+
+.name-container {
+  flex-grow: 1;
+  margin-left: 40rpx;
+  height: 100%;
+}
+
+/* 昵称 */
+
+.user-name {
+  display: flex;
+  height: 50%;
+  text-align: center;
+  align-items: center;
+  font-size: 34prx;
+  color: white;
+}
+
+/* 签名简介 */
+
+.user-autograph {
+  display: flex;
+  height: 50%;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: white;
+}
+
+.attention-state {
+  width: 40px;
+  height: 34px;
+  margin-right: 80rpx;
+}
+
+/* 朋友动态栏 */
+
+.friend-container {
+  margin-left: 60rpx;
+  margin-right: 60rpx;
+}
+
+/* 朋友圈文本信息 */
+
+.friend-text {
+  font-size: 30rpx;
+  color: white;
+  text-decoration-line: underline;
+}
+
+/* 朋友圈图片框 */
+
+.friend-image-container {
+  width: 100%;
+  display: flex;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+/* 朋友圈图片item */
+
+.friend-image {
+  width: 32%;
+  height: 140rpx;
+  border: solid #fff 1rpx;
+}
+
+.comment-container {
+  width: 100vw;
+  position: fixed;
+  height: 80rpx;
+  bottom: 0;
+  border-bottom: solid #e4e3e2 1px;
+  border-top: solid #e4e3e2 1px;
+  padding: 20rpx 20rpx 20rpx;
+  display: flex;
+  background-color: black;
+  overflow: hidden;
+}
+
+.comment-container input {
+  border: solid #e4e3e2 1px;
+  height: 50rpx;
+  padding: 0rpx 20rpx;
+  flex-grow: 1;
+  font-size: 30rpx;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 10rpx;
+}
+
+.comment {
+  display: flex;
+  padding: 0rpx 20rpx;
+  height: 50rpx;
+  align-items: center;
+  font-size: 26rpx;
+  border: solid #e4e3e2 1px;
+  border-radius: 10rpx;
+  color: white;
+  margin-left: 30rpx;
+  background-color: #313131;
+}
+
+.reward {
+  display: flex;
+  padding: 0rpx 20rpx;
+  height: 50rpx;
+  align-items: center;
+  font-size: 26rpx;
+  border: solid #e4e3e2 1px;
+  border-radius: 10rpx;
+  color: white;
+  margin-left: 30rpx;
+  margin-right: 40rpx;
+  background-color: #313131;
+}

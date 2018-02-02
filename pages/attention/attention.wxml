@@ -1,0 +1,54 @@
+<!--attention.wxml-->
+<view class="attention">
+  <block wx:for="{{friendList}}" wx:key='id'>
+    <view class='item-container'>
+      <view class='header-container'>
+        <image class='user-photo' src='{{item.photo}}'></image>
+        <text class='user-name'>{{item.name}}</text>
+      </view>
+      <view class='friend-container' bindtap='toDynamic'>
+        <text class='friend-text'>{{item.friend_text}}</text>
+        <view class='friend-image-container'>
+          <block wx:for="{{item.imageList}}" wx:key='id'>
+            <image class='friend-image' src='{{item.icon}}'></image>
+          </block>
+        </view>
+      </view>
+      <view class='button-container'>
+        <view class='praise-parent'>
+          <view class='praise-btn'>
+            <text class='praise-txt'>赞</text>
+            <image class='praise-img' src='../../images/heart.png'></image>
+          </view>
+        </view>
+        <view class='comment-parent'>
+          <view class='comment-btn'>
+            <text class='comment-txt'>评论</text>
+            <image class='comment-img' src='../../images/comment.png'></image>
+          </view>
+        </view>
+      </view>
+
+      <view class='comment-container'>
+        <block wx:if='{{item.praiseList.length>0}}'>
+          <view class='praise-container '>
+            <image class='heart-img ' src='../../images/heart.png '></image>
+            <block wx:for='{{item.praiseList}}' wx:key='id'>
+              <text class='parise-name'>{{item.name}}</text>
+            </block>
+          </view>
+        </block>
+        <block wx:for='{{item.commentList}}' wx:key='id'>
+          <view class='comment-item'>
+            <text class='commentator'>{{item.commentator}}</text>
+            <block wx:if='{{item.be_commented.length>0}}'>
+              <text class='reply'> 回复 </text>
+            </block>
+            <text class='be-commented'>{{item.be_commented}}</text>
+            <text class='comment-content'>{{" : "+item.comment_content}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

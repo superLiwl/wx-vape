@@ -1,0 +1,16 @@
+<!--user.wxml-->
+<view class="user">
+  <view class='header-container'>
+    <image class='user-photo' src='../../images/photo.jpg'></image>
+    <view class='name-container'>
+      <text class='user-name'>昵称：</text>
+      <text class='user-autograph'>签名、简介</text>
+    </view>
+  </view>
+  <view class='button-container'>
+    <text class='reward'>打赏记录</text>
+    <text class='question'>常见问题</text>
+    <text class='about'>关于雾</text>
+    <text class='notice'>通知</text>
+  </view>
+</view>

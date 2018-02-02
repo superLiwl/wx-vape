@@ -1,0 +1,7 @@
+<!--vape.wxml-->
+<view class="vape">
+  <view class="text">
+    <text>vape</text>
+  </view>
+
+</view>

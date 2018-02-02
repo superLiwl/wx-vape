@@ -1,0 +1,15 @@
+<view class='article'>
+  <view class='article-container'>
+    <view class='title'>{{title}} </view>
+    <view class='author-container'>
+      <text class='author'>{{author}}</text>
+      <text class='time'>{{time}}</text>
+    </view>
+    <view class='content'>{{content}} </view>
+  </view>
+  <view class='comment-container'>
+    <input class='comment-input' value='输入评论' />
+    <view>评论</view>
+  </view>
+
+</view>
