@@ -128,3 +128,9 @@
   height: 200rpx;
   margin-top: 1px;
 }
+
+.loading {
+  color: white;
+  text-align: center;
+  font-size: 26rpx;
+}

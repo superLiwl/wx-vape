@@ -3,7 +3,6 @@
     "pages/index/index",
     "pages/attention/attention",
     "pages/file/file",
-    "pages/vape/vape",
     "pages/user/user",
     "pages/top/top",
     "pages/search/search",
@@ -34,12 +33,6 @@
         "color": "#fff",
         "iconPath": "images/attention.png",
         "selectedIconPath": "images/attention.png"
-      },
-      {
-        "pagePath": "pages/vape/vape",
-        "color": "#fff",
-        "iconPath": "images/vape.png",
-        "selectedIconPath": "images/vape.png"
       },
       {
         "pagePath": "pages/file/file",

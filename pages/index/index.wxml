@@ -23,21 +23,23 @@
   <image class='top-btn' bindtap='toTop' src='../../images/top_bg.png' />
   <image class='encyclopedias-btn ' bindtap='toSearch' src='../../images/encyclopedias_bg.png' />
   <image class='nearby-btn' src='../../images/nearby_bg.png' />
-  <image class='flower-btn' src='../../images/flower_bg.png' />
+  <image class='flower-btn' bindtap='toFlower' src='../../images/flower_bg.png' />
   <image class='sign-btn' bindtap='sign' src='{{sign_icon}}' />
 </view>
 <!--图片展示区-->
 <view class='image-container'>
   <view class='image-header-container '>
-    <image class='image1' src='../../images/image1.jpg' />
+    <image class='image1' src='{{hotImage1}}' />
     <view class='image-header-child '>
-      <image class='image2' src='../../images/image2.jpg' />
-      <image class='image3' src='../../images/image3.jpg' />
+      <image class='image2' src='{{hotImage2}}' />
+      <image class='image3' src='{{hotImage3}}' />
     </view>
   </view>
   <view class='image-form-container'>
     <block wx:for="{{pictureList}}" wx:key='id'>
-      <image class='image-item' src='{{item.icon}}' />
+      <image class='image-item' src='{{item.url}}' />
     </block>
   </view>
+  <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+  <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
 </view>
