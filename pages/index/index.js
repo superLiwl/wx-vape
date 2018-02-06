@@ -171,36 +171,12 @@ Page({
     }
   },
   //创建动态提示框
-  buildDynamic: function () {
+  toBuildDynamic: function () {
     wx.navigateTo({
       url: '../buildDynamic/buildDynamic',
     })
-    
-    // let that = this;
-    // wx.showActionSheet({
-    //   itemList: ['拍摄', '从相册选择'],
-    //   success: function (res) {
-    //     if (res.tapIndex == 0) {
-    //       that.chooseImage('camera');
-    //     } else if (res.tapIndex == 1) {
-    //       that.chooseImage('album');
-    //     }
-    //   }
-    // })
   },
-  chooseImage: function (sourceType) {
-    wx.chooseImage({
-      count: 1, // 默认9  
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-      sourceType: [sourceType], // 可以指定来源是相册还是相机，默认二者都有  
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        _this.setData({
-          tempFilePaths: res.tempFilePaths
-        })
-      }
-    })
-  }
+
 }, )
 
 

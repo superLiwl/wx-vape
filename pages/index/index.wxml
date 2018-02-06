@@ -5,7 +5,7 @@
     <image class='search-icon' src='../../images/search.png' />
     <input class='search-input' value='输入关键字搜索用户、文章' />
   </view>
-  <image class='camera' bindtap='buildDynamic' src='../../images/camera.png ' />
+  <image class='camera' bindtap='toBuildDynamic' src='../../images/camera.png ' />
 </view>
 <!--轮播图-->
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">

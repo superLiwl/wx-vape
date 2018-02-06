@@ -2,7 +2,34 @@
   padding: 10rpx 40rpx;
 }
 
-.build-dynamic input {
+.build-dynamic textarea {
+  height: 200rpx;
   color: white;
   font-size: 26rpx;
+}
+
+.image-container {
+}
+
+.image-container image {
+  width: 140rpx;
+  height: 140rpx;
+  margin: 20rpx;
+  border: solid #fff 1px;
+}
+
+.location-container {
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+}
+
+.location-container image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.location-container text {
+  color: white;
+  font-size: 26rox;
 }

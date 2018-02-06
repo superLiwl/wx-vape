@@ -1,12 +1,18 @@
 <view class='build-dynamic'>
-  <input value='这一刻的想法'></input>
+  <textarea value='这一刻的想法'></textarea>
   <view class='image-container'>
-    <block wx:for='{{imagesList}}' wx:key='id'>
-      <image>{{item.name}}</image>
+    <block wx:for='{{imagesFilePaths}}' wx:key='id'>
+      <image bindtap='manageImage' bindtouchstart="mytouchstart" bindtouchend="mytouchend" bindtap="editAddress" data-index='{{index}}' mode='aspectFill' src='{{item}}'></image>
     </block>
-    <image src='../../images/upload.png'></image>
-  </view>
+    <block wx:if='{{imagesFilePaths.length<9}}'>
+      <image bindtap='uploadImages' src='../../images/upload.png'></image>
+    </block>
 
+  </view>
+  <view class='location-container'>
+    <image src='../../images/location.png'></image>
+    <text>{{location}}</text>
+  </view>
 
 
 </view>
