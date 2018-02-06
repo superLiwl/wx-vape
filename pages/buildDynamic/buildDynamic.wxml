@@ -1,0 +1,12 @@
+<view class='build-dynamic'>
+  <input value='这一刻的想法'></input>
+  <view class='image-container'>
+    <block wx:for='{{imagesList}}' wx:key='id'>
+      <image>{{item.name}}</image>
+    </block>
+    <image src='../../images/upload.png'></image>
+  </view>
+
+
+
+</view>

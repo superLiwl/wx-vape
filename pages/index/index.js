@@ -5,14 +5,13 @@ var imageDomain = app.globalData.imageDomain;
 var commonUrl = app.globalData.commonUrl;
 var openId = app.globalData.openId;
 var sign_state = false;
-var pageIndex = 1;
-var pageSize = 10;
+
 Page({
   data: {
-    hotImage1: imageDomain + "2343424/93f61c0a31764383a4c19c44278a9a91.png",
-    hotImage2: imageDomain + "2343424/7df0d4f87109460b883dfe5b535406fc.png",
-    hotImage3: imageDomain + "2343424/93f61c0a31764383a4c19c44278a9a91.png",
-    imgUrls: [],
+    hotImage1: "",
+    hotImage2: "",
+    hotImage3: "",
+    imgUrls: [],//轮播图
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
@@ -21,13 +20,10 @@ Page({
     searchSongList: [], //放置返回数据的数组  
     isFromSearch: true,   // 用于判断searchSongList数组是不是空数组，默认true，空的数组  
     pageIndex: 1,   // 设置加载的第几次，默认是第一次  
-    pageSize: 10,      //返回数据的个数  
-    searchLoading: true, //"上拉加载"的变量，默认false，隐藏  
-    searchLoadingComplete: true , //“没有数据”的变量，默认false，隐藏  
-    pictureList: [
-
-    ],
-
+    pageSize: 12,      //返回数据的个数  
+    searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
+    searchLoadingComplete: false, //“没有数据”的变量，默认false，隐藏  
+    pictureList: [],
     sign_icon: '../../images/unsign.png',
   },
 
@@ -41,6 +37,7 @@ Page({
     }
     that.getIndicator();
     that.getHotImage();
+    that.getImagesList();
   },
   //获取轮播图
   getIndicator: function () {
@@ -126,7 +123,9 @@ Page({
       method: "GET",
       success: function (res) {
         that.setData({
-          // hotImage: res.data.data,
+          hotImage1: res.data.data[0].url,
+          hotImage2: res.data.data[1].url,
+          hotImage3: res.data.data[2].url,
         })
       },
     })
@@ -134,14 +133,27 @@ Page({
   //图片展示区图片
   getImagesList: function () {
     let that = this;
+    let pageIndex = that.data.pageIndex;//把第几次加载次数作为参数  
+    let pageSize = that.data.pageSize; //返回数据的个数  
     wx.request({
       url: commonUrl + "dynamicImage/micro/" + pageIndex + "/" + pageSize,
       header: { "Content-Type": "application/json" },
       method: "GET",
       success: function (res) {
-        that.setData({
-          pictureList: res.data.data.list
-        })
+        //判断是否有数据，有则取数据  
+        let list = res.data.data.list;
+        if (list != null && list.length != 0) {
+          that.setData({
+            pictureList: that.data.pictureList.concat(res.data.data.list), //获取数据数组
+            searchLoading: true   //把"上拉加载"的变量设为false，显示  
+          });
+          //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
+        } else {
+          that.setData({
+            searchLoadingComplete: true, //把“没有数据”设为true，显示  
+            searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
+          });
+        }
       },
     })
   },
@@ -150,10 +162,45 @@ Page({
  * 页面上拉触底事件的处理函数
  */
   onReachBottom: function () {
-    pageIndex++;
     let that = this;
-    that.getImagesList();
+    if (that.data.searchLoading && !that.data.searchLoadingComplete) {
+      that.setData({
+        pageIndex: that.data.pageIndex + 1,  //每次触发上拉事件，把searchPageNum+1  
+      });
+      that.getImagesList();
+    }
   },
+  //创建动态提示框
+  buildDynamic: function () {
+    wx.navigateTo({
+      url: '../buildDynamic/buildDynamic',
+    })
+    
+    // let that = this;
+    // wx.showActionSheet({
+    //   itemList: ['拍摄', '从相册选择'],
+    //   success: function (res) {
+    //     if (res.tapIndex == 0) {
+    //       that.chooseImage('camera');
+    //     } else if (res.tapIndex == 1) {
+    //       that.chooseImage('album');
+    //     }
+    //   }
+    // })
+  },
+  chooseImage: function (sourceType) {
+    wx.chooseImage({
+      count: 1, // 默认9  
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+      sourceType: [sourceType], // 可以指定来源是相册还是相机，默认二者都有  
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+        _this.setData({
+          tempFilePaths: res.tempFilePaths
+        })
+      }
+    })
+  }
 }, )
 
 

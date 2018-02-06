@@ -8,7 +8,7 @@
     "pages/search/search",
     "pages/dynamic/dynamic",
     "pages/article/article",
-    "pages/logs/logs"
+    "pages/buildDynamic/buildDynamic"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -69,3 +69,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.loading {
+  color: white;
+  text-align: center;
+  font-size: 26rpx;
+}
