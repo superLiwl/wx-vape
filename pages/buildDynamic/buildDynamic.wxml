@@ -2,7 +2,7 @@
   <textarea value='这一刻的想法'></textarea>
   <view class='image-container'>
     <block wx:for='{{imagesFilePaths}}' wx:key='id'>
-      <image bindtap='manageImage' bindtouchstart="mytouchstart" bindtouchend="mytouchend" bindtap="editAddress" data-index='{{index}}' mode='aspectFill' src='{{item}}'></image>
+      <image bindtap='manageImage' bindtouchstart="mytouchstart" bindtouchend="mytouchend" data-index='{{index}}' mode='aspectFill' src='{{item}}'></image>
     </block>
     <block wx:if='{{imagesFilePaths.length<9}}'>
       <image bindtap='uploadImages' src='../../images/upload.png'></image>
@@ -11,8 +11,8 @@
   </view>
   <view class='location-container'>
     <image src='../../images/location.png'></image>
-    <text>{{location}}</text>
+    <text>{{address}}</text>
   </view>
-
+  <button bindtap='uploadImage'>发布</button>
 
 </view>

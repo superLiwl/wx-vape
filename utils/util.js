@@ -1,3 +1,6 @@
+// 引入腾讯地图SDK核心类
+var QQMapWX = require('../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -13,6 +16,7 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+
 
 module.exports = {
   formatTime: formatTime,
@@ -31,4 +35,5 @@ module.exports = {
 
     return matrix;
   },
+
 }

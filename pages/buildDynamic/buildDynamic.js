@@ -1,3 +1,10 @@
+const app = getApp();
+// 引入腾讯地图SDK核心类
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
+var commonUrl = app.globalData.commonUrl;
+var userId = app.globalData.userId;
+var imageIndex = 0
 Page({
 
   /**
@@ -5,14 +12,41 @@ Page({
    */
   data: {
     imagesFilePaths: [],
-    location: '北京'
+    address: '',
+    content: '',
+    createUserId: '',
+    images: [],
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: '2GHBZ-2VXCO-7LRWH-SOBRZ-CTK4Q-UMBK3'
+    });
+    let that = this;
+  },
+  onShow: function () {
+    let that = this;
+    // 调用接口
+    qqmapsdk.search({
+      keyword: '街道 ',
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          address: res.data[0].address
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    })
   },
   //创建动态提示框
   uploadImages: function () {
@@ -37,16 +71,16 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
         that.setData({
-          imagesFilePaths: res.tempFilePaths
+          imagesFilePaths: that.data.imagesFilePaths.concat(res.tempFilePaths)
         })
       }
     })
   },
 
   manageImage: function (e) {
+    let that = this;
     //获取当前图片的下表
-    index = e.currentTarget.dataset.index;
-    pictures = that.data.imagesFilePaths;
+    let index = e.currentTarget.dataset.index;
     //触摸时间距离页面打开的毫秒数  
     var touchTime = that.data.touch_end - that.data.touch_start;
     //如果按下时间大于350为长按  
@@ -55,9 +89,10 @@ Page({
         content: '删除',
         success: function (res) {
           if (res.confirm) {
+            that.data.imagesFilePaths.splice(index, 1);
             console.log('用户点击确定')
             that.setData({
-              pictures: pictures.splice(e.index, 1)
+              imagesFilePaths: that.data.imagesFilePaths
             })
           } else if (res.cancel) {
             console.log('用户点击取消')
@@ -90,4 +125,57 @@ Page({
     })
     console.log(e.timeStamp + '- touch-end')
   },
+  uploadImage: function () {
+    let that = this;
+    wx.uploadFile({
+      url: commonUrl + 'dynamic/micro/add',
+      filePath: that.data.imagesFilePaths[imageIndex],
+      name: 'file',
+      formData: {
+        'address': that.data.address,
+        'content': that.data.content,
+        'createUserId': userId,
+        'images': that.data.images,
+        'type': 1,
+
+      },
+      success: function (res) {
+        that.setData({
+          images: res.data.data.images
+        })
+        //do something
+      }, complete() {
+        imageIndex++
+        if (imageIndex == that.data.imagesFilePaths.length) {
+          imageIndex = 0;
+          that.uploadDynamin()
+        } else if (imageIndex < that.data.imagesFilePaths.length) {//若图片还没有传完，则继续调用函数  
+          that.uploadImage()
+        }
+      }
+    })
+  },
+  uploadDynamin: function () {
+    wx.request({
+      url: commonUrl + 'dynamic/micro/add',
+      header: { "Content-Type": "application/json" },
+      method: "POST",
+      data: {
+        'address': that.data.address,
+        'content': that.data.content,
+        'createUserId': userId,
+        'images': that.data.images,
+        'type': 1,
+      },
+      success: function (res) {
+        console.log(res);
+        wx.showToast({
+          title: '上传成功',
+        })
+      },
+      fail: function () {
+        console.log('getIndicator--GG');
+      }
+    })
+  }
 })

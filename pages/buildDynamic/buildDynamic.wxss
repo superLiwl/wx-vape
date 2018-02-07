@@ -31,5 +31,12 @@
 
 .location-container text {
   color: white;
-  font-size: 26rox;
+  font-size: 26rpx;
+}
+
+.build-dynamic button {
+  font-size: 30rpx;
+  margin: 20rpx 40rpx;
+  color: black;
+  border: solid #fff 1px;
 }

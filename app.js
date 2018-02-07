@@ -1,7 +1,15 @@
 //app.js
+// var util = require('/utils/util.js');
+// 引入腾讯地图SDK核心类
+var QQMapWX = require('/libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 App({
   onLaunch: function () {
+    // this.utils = new util()
     var that = this;
+    var qqmapsdk = new QQMapWX({
+      key: '2GHBZ-2VXCO-7LRWH-SOBRZ-CTK4Q-UMBK3'
+    })
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -28,16 +36,18 @@ App({
             console.log(res.data)
             OPEN_ID = res.data.openid;//获取到的openid  
             SESSION_KEY = res.data.session_key;//获取到session_key  
-            // that.setData({
-            //   openid: res.data.openid.substr(0, 10) + '********' + res.data.openid.substr(res.data.openid.length - 8, res.data.openid.length),
-            //   session_key: res.data.session_key.substr(0, 8) + '********' + res.data.session_key.substr(res.data.session_key.length - 6, res.data.session_key.length)
-            // })
-            that.globalData.openId = res.data.openid.substr(0, 10) + '********' + res.data.openid.substr(res.data.openid.length - 8, res.data.openid.length), OPEN_ID
+            that.globalData.openId = res.data.openid.substr(0, 10) + '********' + res.data.openid.substr(res.data.openid.length - 8, res.data.openid.length)
+            that.getUserInfo();
           }
         })
       }
 
     })
+
+
+  },
+  getUserInfo: function () {
+    let that = this;
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -47,7 +57,9 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              // var location = util.getLocation
+              that.getLocation();
+              // that.globalData.address = location.data[0].address
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -58,24 +70,57 @@ App({
         }
       }
     })
-    // wx.request({
-    //   url: commonUrl + "/user/micro/" + OPEN_ID,
-    //   header: { "Content-Type": "application/json" },
-    //   method: "GET",
-    //   success: function (res) {
-    //     sign_state = true,
-    //       that.setData({
-    //       })
-    //   },
-    //   fail: function () {
-
-    //   }
-    // })
   },
 
+  getLocation: function () {
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+      success: function (res) {
+        console.log("定位成功");
+        that.globalData.latitude = res.latitude
+        that.globalData.longitude = res.longitude
+      },
+      complete: function () {
+        that.bindUser();
+      }
+    })
+  },
+  bindUser: function () {
+    let that = this;
+    wx.request({
+      url: that.globalData.commonUrl + "/user/micro/add",
+      header: { "Content-Type": "application/json" },
+      method: "POST",
+      data: {
+        "openId": that.globalData.openId,
+        "address": that.globalData.address,
+        "age": "",
+        "code": "",
+        "gender": "",
+        "headPortraitImg": that.globalData.userInfo.avatarUrl,
+        "hobby": "",
+        "status": "",
+        "loginName": "",
+        "password": "",
+        "nickName": that.globalData.userInfo.nickName,
+        "ration": "",
+        "skill": "",
+        "longitude": that.globalData.longitude,//经度
+        "latitude": that.globalData.latitude,//纬度
+      },
+      success: function (res) {
+        that.globalData.userId = res.data.data.id
+      },
+    })
+  },
   globalData: {
     userInfo: null,
     openId: '',//储存获取到openid  
+    address: '',
+    longitude: '',//经度
+    latitude: '',//纬度
+    userImag: '',
     userId: '',//储存获取到userId  
     commonUrl: 'http://47.95.2.132:9041/',
     imageDomain: 'http://47.95.2.132:9999/images/'
