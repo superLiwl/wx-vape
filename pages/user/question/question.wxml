@@ -1,0 +1,17 @@
+<!--question.wxml-->
+<view class="user">
+  <view class='button-container'>
+    <text class='question'>
+      问题：打赏记录1\n回答：是看得见啊看来大家速度咯教授李稻葵教授撒旦撒旦就撒了快到家了双卡的
+    </text>
+    <text class='question'>
+      问题：打赏记录1\n回答：是看得见啊看来大家速度咯教授李稻葵教授撒旦撒旦就撒了快到家了双卡
+    </text>
+    <text class='question'>
+      问题：打赏记录1\n回答：是看得见啊看来大家速度咯教授李稻葵教授撒旦撒旦就撒了快到家了双卡
+    </text>
+    <text class='question'>
+      问题：打赏记录1\n回答：是看得见啊看来大家速度咯教授李稻葵教授撒旦撒旦就撒了快到家了双卡
+    </text>
+  </view>
+</view>

@@ -8,7 +8,9 @@
     "pages/search/search",
     "pages/dynamic/dynamic",
     "pages/article/article",
-    "pages/buildDynamic/buildDynamic"
+    "pages/buildDynamic/buildDynamic",
+    "pages/user/question/question",
+    "pages/user/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

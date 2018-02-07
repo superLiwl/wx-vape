@@ -9,8 +9,8 @@
   </view>
   <view class='button-container'>
     <text class='reward'>打赏记录</text>
-    <text class='question'>常见问题</text>
-    <text class='about'>关于雾</text>
+    <text class='question' bindtap='toQuestion'>常见问题</text>
+    <text class='about' bindtap='toAbout'>关于雾</text>
     <text class='notice'>通知</text>
   </view>
 </view>
