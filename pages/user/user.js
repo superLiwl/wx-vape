@@ -1,4 +1,10 @@
 Page({
+ //跳转到打赏记录
+  toRecord: function() {
+    wx.navigateTo({
+      url: '../user/record/record',
+    })
+  },
   //跳转到常见问题
   toQuestion: function () {
     wx.navigateTo({

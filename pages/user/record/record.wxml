@@ -1,0 +1,11 @@
+<view class='article-container'>
+  <block wx:for='{{searchList}}' wx:key='id'>
+    <view>
+      <text class='article-content'>
+        {{item.createTime}}\t\t\t\t\t\t{{item.nickName}}\t\t\t\t\t\t{{item.rewardNum}}
+      </text>
+    </view>
+  </block>
+</view>
+<view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+<view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>

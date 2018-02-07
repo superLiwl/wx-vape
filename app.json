@@ -10,7 +10,8 @@
     "pages/article/article",
     "pages/buildDynamic/buildDynamic",
     "pages/user/question/question",
-    "pages/user/about/about"
+    "pages/user/about/about",
+    "pages/user/record/record"
   ],
   "window": {
     "backgroundTextStyle": "light",
