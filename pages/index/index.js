@@ -123,9 +123,9 @@ Page({
       method: "GET",
       success: function (res) {
         that.setData({
-          // hotImage1: res.data.data[0].url,
-          // hotImage2: res.data.data[1].url,
-          // hotImage3: res.data.data[2].url,
+          hotImage1: res.data.data[0].url,
+          hotImage2: res.data.data[1].url,
+          hotImage3: res.data.data[2].url,
         })
       },
     })

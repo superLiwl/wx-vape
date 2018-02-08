@@ -108,7 +108,7 @@ App({
         "latitude": that.globalData.latitude,//纬度
       },
       success: function (res) {
-        if (res.data.status == 200) {
+        if (res.statusCode == 200) {
           that.globalData.userId = res.data.data.id
         }
         if (that.globalData.userId == "") {
