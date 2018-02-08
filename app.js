@@ -15,7 +15,6 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     const APP_ID = 'wx75b6f98051d03aa7';//输入小程序appid  
-    var OPEN_ID = ''//储存获取到openid  
     const APP_SECRET = '9421a8b369d580df2f47e4b59460f0da';//输入小程序app_secret  
     var SESSION_KEY = ''//储存获取到session_key 
     // 登录
@@ -34,9 +33,8 @@ App({
           method: 'GET',
           success: function (res) {
             console.log(res.data)
-            OPEN_ID = res.data.openid;//获取到的openid  
             SESSION_KEY = res.data.session_key;//获取到session_key  
-            that.globalData.openId = res.data.openid.substr(0, 10) + '********' + res.data.openid.substr(res.data.openid.length - 8, res.data.openid.length)
+            that.globalData.openId = res.data.openid
             that.getUserInfo();
           }
         })
@@ -110,8 +108,20 @@ App({
         "latitude": that.globalData.latitude,//纬度
       },
       success: function (res) {
-        that.globalData.userId = res.data.data.id
+        if (res.data.status == 200) {
+          that.globalData.userId = res.data.data.id
+        }
+        if (that.globalData.userId == "") {
+          wx.showToast({
+            title: res.data.data.msg,
+          })
+        }
       },
+      fail: function () {
+        wx.showToast({
+          title: "请检查网络连接",
+        })
+      }
     })
   },
   globalData: {

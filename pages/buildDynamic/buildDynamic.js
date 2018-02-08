@@ -3,7 +3,6 @@ const app = getApp();
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
 var qqmapsdk;
 var commonUrl = app.globalData.commonUrl;
-var userId = app.globalData.userId;
 var imageIndex = 0
 Page({
 
@@ -15,6 +14,7 @@ Page({
     address: '',
     content: '',
     createUserId: '',
+    tag: '',
     images: [],
 
   },
@@ -128,20 +128,13 @@ Page({
   uploadImage: function () {
     let that = this;
     wx.uploadFile({
-      url: commonUrl + 'dynamic/micro/add',
+      url: commonUrl + 'fileUpload/' + app.globalData.userId + '/' + that.data.tag,
+      header: { "Content-Type": "application/x-www-form-urlencoded" },
       filePath: that.data.imagesFilePaths[imageIndex],
       name: 'file',
-      formData: {
-        'address': that.data.address,
-        'content': that.data.content,
-        'createUserId': userId,
-        'images': that.data.images,
-        'type': 1,
-
-      },
       success: function (res) {
         that.setData({
-          images: res.data.data.images
+          tag: res.data
         })
         //do something
       }, complete() {
@@ -156,6 +149,7 @@ Page({
     })
   },
   uploadDynamin: function () {
+    let that = this;
     wx.request({
       url: commonUrl + 'dynamic/micro/add',
       header: { "Content-Type": "application/json" },
@@ -170,11 +164,13 @@ Page({
       success: function (res) {
         console.log(res);
         wx.showToast({
-          title: '上传成功',
+          title: '创建成功',
         })
       },
       fail: function () {
-        console.log('getIndicator--GG');
+        wx.showToast({
+          title: res.data.msg,
+        })
       }
     })
   }

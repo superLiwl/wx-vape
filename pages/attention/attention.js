@@ -1,167 +1,75 @@
+const app = getApp();
+var commonUrl = app.globalData.commonUrl;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    friendList: [
-      {
-        id: 0,
-        name: '路飞',
-        photo: '../../images/photo.jpg',
-        friend_text: '今天天气不错，挺风和日丽的,我们下午没有课，天气也挺爽的，啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-        imageList: [
-          {
-            icon: '../../images/image1.jpg',
-          },
-          {
-            icon: '../../images/image2.jpg',
-          },
-          {
-            icon: '../../images/image3.jpg',
-          },
-          {
-            icon: '../../images/image4.jpg',
-          },
-          {
-            icon: '../../images/image1.jpg',
-          }
-        ],
-        commentList: [
-          {
-            id: 0,
-            commentator: '娜美',
-            be_commented: '',
-            comment_content: '你是白痴吗'
-          },
-          {
-            id: 1,
-            commentator: '索隆',
-            be_commented: '娜美',
-            comment_content: '这还用问吗？他肯定是白痴啊，他不是还能谁是。。。。。。。。'
-          }
-        ],
-        praiseList: [
-          {
-            name: '乌索普',
-          },
-          {
-            name: '卡普',
-          },
-          {
-            name: '博雅.汉库克',
-          }
-        ]
-      },
-      {
-        id: 1,
-        name: '娜美',
-        photo: '../../images/image5.jpg',
-        friend_text: '今天天气不错，挺风和日丽的,我们下午没有课，天气也挺爽的，啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-        imageList: [
-          {
-            icon: '../../images/image1.jpg',
-          },
-          {
-            icon: '../../images/image2.jpg',
-          },
-          {
-            icon: '../../images/image3.jpg',
-          },
-          {
-            icon: '../../images/image4.jpg',
-          },
-          {
-            icon: '../../images/image1.jpg',
-          }
-        ],
-      }, {
-        id: 2,
-        name: '诺诺罗亚.索隆',
-        photo: '../../images/image6.jpg',
-        friend_text: '今天天气不错，挺风和日丽的,我们下午没有课，天气也挺爽的，啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-        imageList: [
-          {
-            icon: '../../images/image1.jpg',
-          },
-          {
-            icon: '../../images/image2.jpg',
-          },
-          {
-            icon: '../../images/image3.jpg',
-          },
-          {
-            icon: '../../images/image4.jpg',
-          },
-          {
-            icon: '../../images/image1.jpg',
-          }
-        ],
-      }
-
-    ],
-
+    attentionList: [],
+    pageIndex: 1,   // 设置加载的第几次，默认是第一次  
+    pageSize: 12,      //返回数据的个数  
+    searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
+    searchLoadingComplete: false, //“没有数据”的变量，默认false，隐藏 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getAttentionList()
   },
 
 
-  toDynamic: function () {
+  toDynamic: function (e) {
+    let that = this;
+    let index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '../dynamic/dynamic',
+      url: '../dynamic/dynamic?id=' + that.data.attentionList[index].id,
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  getAttentionList: function () {
+    let that = this;
+    let pageIndex = that.data.pageIndex;//把第几次加载次数作为参数  
+    let pageSize = that.data.pageSize; //返回数据的个数  
+    wx.request({
+      url: commonUrl + "dynamic/micro/" + pageIndex + "/" + pageSize,
+      header: { "Content-Type": "application/json" },
+      method: "POST",
+      data: {
+        "id": "",
+        "content": "",
+        "createUserId": ""
+      },
+      success: function (res) {
+        //判断是否有数据，有则取数据  
+        let list = res.data.data.list;
+        if (list != null && list.length != 0) {
+          that.setData({
+            attentionList: that.data.attentionList.concat(res.data.data.list), //获取数据数组
+            searchLoading: true   //把"上拉加载"的变量设为false，显示  
+          });
+          //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
+        } else {
+          that.setData({
+            searchLoadingComplete: true, //把“没有数据”设为true，显示  
+            searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
+          });
+        }
+      },
+    })
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  * 页面上拉触底事件的处理函数
+  */
   onReachBottom: function () {
-
+    let that = this;
+    if (that.data.searchLoading && !that.data.searchLoadingComplete) {
+      that.setData({
+        pageIndex: that.data.pageIndex + 1,  //每次触发上拉事件，把searchPageNum+1  
+      });
+      that.getAttentionList();
+    }
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

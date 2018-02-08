@@ -175,6 +175,37 @@
   height: 40rpx;
 }
 
+.rewards-parent {
+  display: flex;
+  margin-right: 40rpx;
+  justify-content: center;
+  border: solid #fff 1px;
+  border-top-left-radius: 5rpx;
+  border-bottom-left-radius: 5rpx;
+}
+
+.rewards-btn {
+  width: 150rpx;
+  justify-content: center;
+  display: flex;
+}
+
+.rewards {
+  display: flex;
+  height: 100%;
+  margin-left: 10rpx;
+  color: white;
+  align-items: center;
+  font-size: 26rpx;
+}
+
+.rewards-img {
+  margin-left: 10rpx;
+  margin-top: 5rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .praise-container {
   width: 100%;
   display: flex;
@@ -192,4 +223,10 @@
   font-size: 26rpx;
   margin-left: 10rpx;
   color: white;
+}
+
+.loading {
+  color: white;
+  text-align: center;
+  font-size: 26rpx;
 }

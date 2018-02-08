@@ -22,9 +22,11 @@ Page({
     that.getSearchList();
   },
 
-  toArticle: function () {
+  toArticle: function (e) {
+    let that = this;
+    let index = e.currentTarget.dataset.index;
     wx: wx.navigateTo({
-      url: '../article/article',
+      url: '../article/article?id=' + that.data.searchList[index].id,
     })
   },
 

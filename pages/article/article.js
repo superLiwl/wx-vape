@@ -1,68 +1,141 @@
+const app = getApp();
+var commonUrl = app.globalData.commonUrl;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title: '路飞与女帝不得不说的故事',
-    author: ' 妮可.罗宾',
-    time: '2018-01-31',
-    content: '和女帝分开后，路飞就去大闹推进城，放了好多罪犯，中了推进城署长的毒。Mr·2找到了叛乱军伊娃和闪电，还有克罗克达尔（原王下七武海）和甚平（现任王下七武海）一起去救路飞的哥哥艾斯，当然，到了行刑场的时候白胡子与他的部下也来营救艾斯了，（中间部分省略，就是在战斗啦）白胡子最终被黑胡子杀死，艾斯被熔岩果实的大将赤犬杀死，路飞受不了失去哥哥的打击而崩溃，这时，甚平，女帝救了路飞把他带往九蛇岛，在这其中一直是特拉法尔加·罗 （十一超新星）在治疗路飞和甚平。接下来是讲小时候的路飞被爷爷带到山贼达旦家，结识了同样是被爷爷寄养在达旦家的海贼王哥而·D·罗杰的儿子——艾斯，和从贵族家逃跑的萨博。三人结为了兄弟。萨博在环境的压迫下，十分早就出了海，但是船被路过的天龙人，给烧毁了（不知道死没死），十年后，17岁的艾斯出海了。接下来，三年后，路飞也出海了，一击击败了当年吃了香克斯的手臂的海霸王。和女帝分开后，路飞就去大闹推进城，放了好多罪犯，中了推进城署长的毒。Mr·2找到了叛乱军伊娃和闪电，还有克罗克达尔（原王下七武海）和甚平（现任王下七武海）一起去救路飞的哥哥艾斯，当然，到了行刑场的时候白胡子与他的部下也来营救艾斯了，（中间部分省略，就是在战斗啦）白胡子最终被黑胡子杀死，艾斯被熔岩果实的大将赤犬杀死，路飞受不了失去哥哥的打击而崩溃，这时，甚平，女帝救了路飞把他带往九蛇岛，在这其中一直是特拉法尔加·罗 （十一超新星）在治疗路飞和甚平。接下来是讲小时候的路飞被爷爷带到山贼达旦家，结识了同样是被爷爷寄养在达旦家的海贼王哥而·D·罗杰的儿子——艾斯，和从贵族家逃跑的萨博。三人结为了兄弟。萨博在环境的压迫下，十分早就出了海，但是船被路过的天龙人，给烧毁了（不知道死没死），十年后，17岁的艾斯出海了。接下来，三年后，路飞也出海了，一击击败了当年吃了香克斯的手臂的海霸王。和女帝分开后，路飞就去大闹推进城，放了好多罪犯，中了推进城署长的毒。Mr·2找到了叛乱军伊娃和闪电，还有克罗克达尔（原王下七武海）和甚平（现任王下七武海）一起去救路飞的哥哥艾斯，当然，到了行刑场的时候白胡子与他的部下也来营救艾斯了，（中间部分省略，就是在战斗啦）白胡子最终被黑胡子杀死，艾斯被熔岩果实的大将赤犬杀死，路飞受不了失去哥哥的打击而崩溃，这时，甚平，女帝救了路飞把他带往九蛇岛，在这其中一直是特拉法尔加·罗 （十一超新星）在治疗路飞和甚平。接下来是讲小时候的路飞被爷爷带到山贼达旦家，结识了同样是被爷爷寄养在达旦家的海贼王哥而·D·罗杰的儿子——艾斯，和从贵族家逃跑的萨博。三人结为了兄弟。萨博在环境的压迫下，十分早就出了海，但是船被路过的天龙人，给烧毁了（不知道死没死），十年后，17岁的艾斯出海了。接下来，三年后，路飞也出海了，一击击败了当年吃了香克斯的手臂的海霸王。',
+    id: '',
+    title: '',
+    author: ' ',
+    createTime: '',
+    content: '',
+    pageIndex: 1,
+    pageSize: 10,
+    commentList: '',
+    searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
+    searchLoadingComplete: false, //“没有数据”的变量，默认false，隐藏  
+    comment: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      id: options.id
+    })
+    this.getData()
+    this.getComment()
   },
+  getData: function () {
+    let that = this;
+    wx.request({
+      url: commonUrl + 'encyclopedia/micro/' + that.data.id,
+      header: { "Content-Type": "application/json" },
+      method: "GET",
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setData({
+            title: res.data.data.title,
+            author: res.data.data.author,
+            content: res.data.data.content,
+            createTime: res.data.data.createTime
+          })
+        } else if (res.data.msg != null) {
+          wx.showToast({
+            title: res.data.msg
+          })
+        }
 
+      },
+      fail: function () {
+        wx.showToast({
+          title: '请检查网络连接'
+        })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  getComment: function () {
+    let that = this;
+    let pageIndex = that.data.pageIndex;//把第几次加载次数作为参数  
+    let pageSize = that.data.pageSize; //返回数据的个数  
+    wx.request({
+      url: commonUrl + "encyclopediaComment/micro/" + pageIndex + "/" + pageSize,
+      header: { "Content-Type": "application/json" },
+      method: "POST",
+      data: {
+        commentId: '',
+        encyclopediaId: "",
+        createUserId: "",
+      },
+      success: function (res) {
+        //判断是否有数据，有则取数据  
+        let list = res.data.data.list;
+        if (list != null && list.length != 0) {
+          that.setData({
+            commentList: that.data.commentList.concat(res.data.data.list), //获取数据数组
+            searchLoading: true   //把"上拉加载"的变量设为false，显示  
+          });
+          //没有数据了，把“没有数据”显示，把“上拉加载”隐藏  
+        } else {
+          that.setData({
+            searchLoadingComplete: true, //把“没有数据”设为true，显示  
+            searchLoading: false  //把"上拉加载"的变量设为false，隐藏  
+          });
+        }
+      },
+    })
   },
+  commentUpload: function () {
+    let that = this;
+    wx.request({
+      url: commonUrl + 'encyclopedia/micro/' + that.data.id,
+      header: { "Content-Type": "application/json" },
+      method: "POST",
+      data: {
+        commentId: "",
+        encyclopediaId: "",
+        comment: that.data.comment,
+        createUserId: "",
+      },
+      success: function (res) {
+        if (res.statusCode == 200) {
+          that.setData({
+            pageIndex: 1,  //每次触发上拉事件，把searchPageNum+1  
+          });
+          that.getComment()
+        } else if (res.data.msg != null) {
+          wx.showToast({
+            title: res.data.msg
+          })
+        }
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+      },
+      fail: function () {
+        wx.showToast({
+          title: '请检查网络连接'
+        })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  getInputComment: function (e) {
+    this.setData({
+      comment: e.detail.value
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let that = this;
+    if (that.data.searchLoading && !that.data.searchLoadingComplete) {
+      that.setData({
+        pageIndex: that.data.pageIndex + 1,  //每次触发上拉事件，把searchPageNum+1  
+      });
+      that.getComment();
+    }
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

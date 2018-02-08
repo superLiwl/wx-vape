@@ -6,7 +6,7 @@
 </view>
 <view class='article-container'>
   <block wx:for='{{searchList}}' wx:key='id'>
-    <view bindtap='toArticle'>
+    <view bindtap='toArticle' data-index='{{index}}'>
       <text class='article-tilte'>{{item.title}}</text>
       <text class='article-content'>{{item.content}}</text>
     </view>

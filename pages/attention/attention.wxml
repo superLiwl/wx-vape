@@ -1,16 +1,16 @@
 <!--attention.wxml-->
 <view class="attention">
-  <block wx:for="{{friendList}}" wx:key='id'>
+  <block wx:for="{{attentionList}}" wx:key='id'>
     <view class='item-container'>
       <view class='header-container'>
-        <image class='user-photo' src='{{item.photo}}'></image>
-        <text class='user-name'>{{item.name}}</text>
+        <image class='user-photo' src='{{item.headPortraitImg}}'></image>
+        <text class='user-name'>{{item.nickName}}</text>
       </view>
-      <view class='friend-container' bindtap='toDynamic'>
-        <text class='friend-text'>{{item.friend_text}}</text>
+      <view class='friend-container' bindtap='toDynamic' data-index='{{index}}'>
+        <text class='friend-text'>{{item.content}}</text>
         <view class='friend-image-container'>
-          <block wx:for="{{item.imageList}}" wx:key='id'>
-            <image class='friend-image' src='{{item.icon}}'></image>
+          <block wx:for="{{item.images}}" wx:key='id'>
+            <image class='friend-image' src='{{item.url}}'></image>
           </block>
         </view>
       </view>
@@ -21,34 +21,43 @@
             <image class='praise-img' src='../../images/heart.png'></image>
           </view>
         </view>
-        <view class='comment-parent'>
+        <!-- <view class='comment-parent'>
           <view class='comment-btn'>
             <text class='comment-txt'>评论</text>
             <image class='comment-img' src='../../images/comment.png'></image>
           </view>
+        </view> -->
+        <view class='rewards-parent'>
+          <view class='rewards-btn'>
+            <text class=' rewards '>打赏：{{item.rewards.length>0?item.rewards.length:0}}</text>
+            <!-- <image class='rewards-img ' src='../../images/rewards.png '></image> -->
+          </view>
+
         </view>
       </view>
 
-      <view class='comment-container'>
-        <block wx:if='{{item.praiseList.length>0}}'>
+      <view class='comment-container '>
+        <block wx:if='{{item.fabulous.length>0}}'>
           <view class='praise-container '>
             <image class='heart-img ' src='../../images/heart.png '></image>
-            <block wx:for='{{item.praiseList}}' wx:key='id'>
-              <text class='parise-name'>{{item.name}}</text>
+            <block wx:for='{{item.fabulous}}' wx:key='id'>
+              <text class='parise-name'>{{item.nickName}}</text>
             </block>
           </view>
         </block>
-        <block wx:for='{{item.commentList}}' wx:key='id'>
+        <block wx:for='{{item.comments}}' wx:key='id'>
           <view class='comment-item'>
-            <text class='commentator'>{{item.commentator}}</text>
-            <block wx:if='{{item.be_commented.length>0}}'>
+            <text class='commentator'>{{item.nickName}}</text>
+            <block wx:if='{{item.commentId.length>0}}'>
               <text class='reply'> 回复 </text>
+              <text class='be-commented'>{{item.createDyUser}}</text>
             </block>
-            <text class='be-commented'>{{item.be_commented}}</text>
-            <text class='comment-content'>{{" : "+item.comment_content}}</text>
+            <text class='comment-content'>{{" : "+item.comment}}</text>
           </view>
         </block>
       </view>
     </view>
   </block>
+  <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+  <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
 </view>

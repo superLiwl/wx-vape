@@ -79,3 +79,15 @@
   margin-right: 40rpx;
   background-color: #313131;
 }
+
+.image-item {
+  width: 24.8%;
+  height: 200rpx;
+  margin-top: 1px;
+}
+
+.loading {
+  color: white;
+  text-align: center;
+  font-size: 26rpx;
+}
