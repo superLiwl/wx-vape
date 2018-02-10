@@ -34,7 +34,7 @@ Page({
         header: { "Content-Type": "application/json" },
         method: "POST",
         data: {
-          "createUserId": "2c914601616ef42d01616f2b2d280005"
+          "createUserId": app.globalData.userId
         },
         success: function (res) {
           //判断是否有数据，有则取数据  
